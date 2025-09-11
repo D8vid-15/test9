@@ -1,0 +1,1537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zafike Royal Hotel - Your Royal Experience Begins Here</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- EmailJS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>
+        // Initialize EmailJS
+        (function() {
+            emailjs.init("ipGr_l0BmU7HA__ks");
+        })();
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --forest-green: #005532;
+            --golden-yellow: #CFAF53;
+            --light-gold: #E8D084;
+            --white: #ffffff;
+            --light-gray: #f8f9fa;
+            --text-dark: #2c3e50;
+            --shadow-light: 0 4px 20px rgba(0, 85, 50, 0.1);
+            --shadow-medium: 0 8px 30px rgba(0, 85, 50, 0.15);
+            --transition: all 0.3s ease;
+        }
+
+        /* Keyframes for animations */
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        @keyframes glow {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.8; }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Preloader Styles */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--forest-green), rgba(0, 85, 50, 0.95));
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1), visibility 1s ease;
+            backdrop-filter: blur(2px);
+        }
+
+        .preloader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .preloader-content {
+            text-align: center;
+            color: var(--white);
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .crown-container {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        .crown-spinner {
+            font-size: 5rem;
+            color: var(--golden-yellow);
+            animation: spin 3s linear infinite, pulse 2s ease-in-out infinite;
+            filter: drop-shadow(0 0 20px rgba(207, 175, 83, 0.5));
+            position: relative;
+            z-index: 2;
+        }
+
+        .crown-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle, rgba(207, 175, 83, 0.3) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: glow 2s ease-in-out infinite alternate;
+            z-index: 1;
+        }
+
+        .orbiting-dots {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120px;
+            height: 120px;
+            z-index: 1;
+        }
+
+        .orbiting-dot {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: var(--golden-yellow);
+            border-radius: 50%;
+            animation: orbit 3s linear infinite;
+            filter: drop-shadow(0 0 5px rgba(207, 175, 83, 0.5));
+        }
+
+        .orbiting-dot:nth-child(1) { animation-delay: 0s; }
+        .orbiting-dot:nth-child(2) { animation-delay: 0.5s; }
+        .orbiting-dot:nth-child(3) { animation-delay: 1s; }
+        .orbiting-dot:nth-child(4) { animation-delay: 1.5s; }
+        .orbiting-dot:nth-child(5) { animation-delay: 2s; }
+        .orbiting-dot:nth-child(6) { animation-delay: 2.5s; }
+
+        @keyframes orbit {
+            0% { transform: rotate(0deg) translateX(60px) rotate(0deg); }
+            100% { transform: rotate(360deg) translateX(60px) rotate(-360deg); }
+        }
+
+        .loading-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin: 1.5rem 0;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            background: var(--golden-yellow);
+            border-radius: 50%;
+            animation: bounce 1.4s ease-in-out infinite both;
+        }
+
+        .dot:nth-child(1) { animation-delay: -0.32s; }
+        .dot:nth-child(2) { animation-delay: -0.16s; }
+        .dot:nth-child(3) { animation-delay: 0s; }
+
+        .preloader-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--light-gold);
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            letter-spacing: 2px;
+        }
+
+        .preloader-subtitle {
+            font-size: 1.1rem;
+            color: var(--white);
+            opacity: 0.9;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--forest-green);
+            z-index: 1000;
+            padding: 1rem 0;
+            box-shadow: var(--shadow-medium);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--golden-yellow);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 400;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .nav-menu a.active,
+        .nav-menu a:hover {
+            color: var(--golden-yellow);
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--golden-yellow);
+            transition: var(--transition);
+        }
+
+        .nav-menu a:hover::after,
+        .nav-menu a.active::after {
+            width: 100%;
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .mobile-menu span {
+            width: 25px;
+            height: 3px;
+            background: var(--white);
+            margin: 3px 0;
+            transition: var(--transition);
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            background: var(--light-gray);
+            padding: 1rem 0;
+        }
+
+        .breadcrumb-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .breadcrumb-nav {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb-nav a {
+            color: var(--forest-green);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .breadcrumb-nav a:hover {
+            color: var(--golden-yellow);
+        }
+
+        .breadcrumb-nav span {
+            color: var(--text-dark);
+        }
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, rgba(0, 85, 50, 0.7), rgba(207, 175, 83, 0.3)),
+                        url(image/slide.JPG);
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient();
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 2rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-tagline {
+            font-size: 1.5rem;
+            color: var(--light-gold);
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--golden-yellow);
+            color: var(--forest-green);
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: var(--transition);
+            box-shadow: var(--shadow-light);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: var(--transition);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(207, 175, 83, 0.4);
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        /* Welcome Section */
+        .welcome {
+            padding: 6rem 0;
+            background: var(--white);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: var(--forest-green);
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--golden-yellow);
+            margin-bottom: 2rem;
+        }
+
+        .welcome-content {
+            text-align: center;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto;
+            color: var(--text-dark);
+        }
+
+        /* Preview Sections */
+        .previews {
+            padding: 6rem 0;
+            background: var(--light-gray);
+        }
+
+        .preview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .preview-card {
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-light);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .preview-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-medium);
+        }
+
+.preview-image {
+            height: 250px;
+            background: linear-gradient(135deg, var(--forest-green), var(--golden-yellow));
+            position: relative;
+            overflow: hidden;
+        }
+.preview-image img.preview-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .preview-image::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .preview-content {
+            padding: 2rem;
+        }
+
+        .preview-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--forest-green);
+            margin-bottom: 1rem;
+        }
+
+        .preview-text {
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .preview-link {
+            color: var(--golden-yellow);
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .preview-link:hover {
+            transform: translateX(5px);
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 6rem 0;
+            background: var(--forest-green);
+            color: var(--white);
+        }
+
+        .testimonial-slider {
+            position: relative;
+            max-width: 800px;
+            margin: 4rem auto 0;
+        }
+
+        .testimonial {
+            text-align: center;
+            padding: 2rem;
+            display: none;
+        }
+
+        .testimonial.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .testimonial-text {
+            font-size: 1.2rem;
+            font-style: italic;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .testimonial-author {
+            font-weight: 500;
+            color: var(--golden-yellow);
+        }
+
+        .testimonial-dots {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .dot.active {
+            background: var(--golden-yellow);
+        }
+
+        .white-divider {
+    height: 100px; /* adjust as needed */
+    background-color: #fff;
+}
+
+        /* Footer */
+.footer {
+    background: var(--forest-green);
+    color: var(--white);
+    padding: 4rem 0 0;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1.5fr;
+    gap: 3rem;
+    margin-bottom: 3rem;
+}
+
+.footer-section h3,
+.footer-section h4 {
+    font-family: 'Playfair Display', serif;
+    margin-bottom: 1.5rem;
+}
+
+.footer-logo h3 {
+    color: var(--golden-yellow);
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.footer-tagline {
+    color: var(--light-gold);
+    font-style: italic;
+    margin-bottom: 1rem;
+}
+
+.footer-description {
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.social-link {
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.social-link:hover {
+    background: var(--golden-yellow);
+    color: var(--forest-green);
+    transform: translateY(-2px);
+}
+
+.footer-title {
+    color: var(--golden-yellow);
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+}
+
+.footer-links {
+    list-style: none;
+}
+
+.footer-links li {
+    margin-bottom: 0.8rem;
+}
+
+.footer-links a {
+    color: var(--white);
+    text-decoration: none;
+    opacity: 0.8;
+    transition: var(--transition);
+}
+
+.footer-links a:hover,
+.footer-links a.active {
+    opacity: 1;
+    color: var(--golden-yellow);
+}
+
+.contact-info {
+    space-y: 1rem;
+}
+
+.contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+    margin-bottom: 1rem;
+}
+
+.contact-item i {
+    color: var(--golden-yellow);
+    width: 16px;
+    margin-top: 2px;
+}
+
+.contact-item span {
+    opacity: 0.9;
+    line-height: 1.5;
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 2rem 0;
+}
+
+.footer-bottom-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.footer-bottom-content p {
+    opacity: 0.8;
+}
+
+.footer-bottom-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.footer-bottom-links a {
+    color: var(--white);
+    text-decoration: none;
+    opacity: 0.8;
+    transition: var(--transition);
+}
+
+.footer-bottom-links a:hover {
+    opacity: 1;
+    color: var(--golden-yellow);
+}
+
+/* Footer Responsive Styles */
+@media (max-width: 768px) {
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .footer-bottom-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-bottom-links {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-container {
+        padding: 0 1rem;
+    }
+
+    .footer-bottom-links {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
+
+
+
+
+        
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        height: 100vh;
+        width: 100%;
+        background: var(--forest-green); /* or any background */
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 999;
+        gap: 2rem;
+        transition: right 0.3s ease;
+    }
+
+    .nav-menu.active {
+        right: 0;
+    }
+
+   /* Animate to "X" */
+.mobile-menu.open span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.mobile-menu.open span:nth-child(2) {
+    opacity: 0;
+}
+
+.mobile-menu.open span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+}
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-tagline {
+                font-size: 1.2rem;
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+            }
+
+            .preview-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+       }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+
+            .preview-card {
+                margin: 0 1rem;
+            }
+        }
+
+        /* Loading Animation */
+        .fade-in {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .preview-card:nth-child(1) { animation-delay: 0.1s; }
+        .preview-card:nth-child(2) { animation-delay: 0.2s; }
+        .preview-card:nth-child(3) { animation-delay: 0.3s; }
+    </style>
+</head>
+<body>
+    <!-- Preloader -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-content">
+            <div class="crown-container">
+                <i class="fas fa-crown crown-spinner"></i>
+                <div class="crown-glow"></div>
+            </div>
+            <div class="loading-dots">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+            <h2 class="preloader-text">Zafike Royal Hotel</h2>
+            <p class="preloader-subtitle">Your Royal Experience Begins Here</p>
+            <div class="orbiting-dots">
+                <div class="orbiting-dot"></div>
+                <div class="orbiting-dot"></div>
+                <div class="orbiting-dot"></div>
+                <div class="orbiting-dot"></div>
+                <div class="orbiting-dot"></div>
+                <div class="orbiting-dot"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">Zafike Royal Hotel</a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="room.html">Rooms & Suites</a></li>
+                <li><a href="amneitites.html">Amenities</a></li>
+                 <li><a href="Meeting.html">Meetings & Events</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Zafike Royal Hotel</h1>
+            <p class="hero-tagline">Your Royal Experience Begins Here</p>
+            <a href="#" class="cta-button" id="openBookingModal">Book Now</a>
+        </div>
+    </section>
+
+    <!-- Welcome Section -->
+    <section class="welcome">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Welcome to Luxury</h2>
+                <p class="section-subtitle">Where Every Stay is a Royal Experience</p>
+            </div>
+            <div class="welcome-content">
+                <p>Experience unparalleled luxury and comfort at Zafike Royal Hotel, where traditional elegance meets modern sophistication. Our commitment to excellence ensures that every guest enjoys a truly memorable stay, surrounded by impeccable service and world-class amenities in an atmosphere of refined luxury.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Preview Sections -->
+    <section class="previews">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Discover Excellence</h2>
+                <p class="section-subtitle">Explore our world-class offerings</p>
+            </div>
+            <div class="preview-grid">
+                <div class="preview-card fade-in">
+                    <div class="preview-image">
+                       <img src="image/room04.jpg" alt="LuxuriousRoom" class="preview-img">
+                    </div>
+                    <div class="preview-content">
+                        <h3 class="preview-title">Luxurious Rooms & Suites</h3>
+                        <p class="preview-text">Indulge in our elegantly appointed accommodations, from comfortable standard rooms to opulent royal suites, each designed with your comfort in mind.</p>
+                        <a href="room.html" class="preview-link">
+                            Explore Rooms <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="preview-card fade-in">
+                    <div class="preview-image">
+                        <img src="image/pool.JPG" alt="Premium Amenities" class="preview-img">
+                    </div>
+                    <div class="preview-content">
+                        <h3 class="preview-title">Premium Amenities</h3>
+                        <p class="preview-text">Enjoy our comprehensive range of services including spa treatments, fine dining, fitness center, and 24-hour concierge service.</p>
+                        <a href="amneitites.html" class="preview-link">
+                            View Amenities <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="preview-card fade-in">
+                    <div class="preview-image">
+                        <img src="image/front3.JPG" alt="Stunning Gallery" class="preview-img">
+                    </div>
+                    <div class="preview-content">
+                        <h3 class="preview-title">Stunning Gallery</h3>
+                        <p class="preview-text">Take a visual journey through our beautiful property, from our grand lobby to our exquisite dining spaces and tranquil gardens.</p>
+                        <a href="gallery.html" class="preview-link">
+                            View Gallery <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" style="color: white;">What Our Guests Say</h2>
+                <p class="section-subtitle" style="color: #E8D084;">Testimonials from our valued guests</p>
+            </div>
+            <div class="testimonial-slider">
+                <div class="testimonial active">
+                    <p class="testimonial-text">"An absolutely extraordinary experience! The attention to detail and level of service at Zafike Royal Hotel exceeded all expectations. Every moment felt truly royal."</p>
+                    <p class="testimonial-author">— Sarah Johnson, Business Executive</p>
+                </div>
+                <div class="testimonial">
+                    <p class="testimonial-text">"The perfect blend of luxury and comfort. The staff went above and beyond to make our anniversary celebration unforgettable. We'll definitely be returning!"</p>
+                    <p class="testimonial-author">— Michael & Emma Thompson, Celebrating 25th Anniversary</p>
+                </div>
+                <div class="testimonial">
+                    <p class="testimonial-text">"From the moment we arrived, we felt like royalty. The amenities are world-class and the location is perfect. Highly recommend for anyone seeking true luxury."</p>
+                    <p class="testimonial-author">— Dr. James Williams, Frequent Traveler</p>
+                </div>
+                <div class="testimonial-dots">
+                    <span class="dot active" onclick="currentSlide(1)"></span>
+                    <span class="dot" onclick="currentSlide(2)"></span>
+                    <span class="dot" onclick="currentSlide(3)"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- White spacer section -->
+<div class="white-divider"></div>
+
+    <!-- Booking Modal -->
+    <div id="bookingModal" class="modal" style="display: none; position: fixed; z-index: 10000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.7);">
+        <div class="modal-content" style="background-color: #fff; margin: 5% auto; padding: 30px; border: 3px solid var(--golden-yellow); border-radius: 15px; width: 90%; max-width: 500px; position: relative;">
+            <span class="close" style="position: absolute; top: 15px; right: 20px; color: var(--forest-green); font-size: 32px; font-weight: bold; cursor: pointer; z-index: 10001;">&times;</span>
+            
+            <h2 style="font-family: 'Playfair Display', serif; color: var(--forest-green); text-align: center; margin-bottom: 20px;">Book Your Stay at Zafike Royal Hotel</h2>
+
+            <!-- Room Preview -->
+            <div id="roomPreview" style="text-align: center; margin-bottom: 20px;">
+                <img id="previewImage" src="" alt="Room Preview" style="display: none; max-width: 100%; border-radius: 10px; border: 2px solid var(--golden-yellow);">
+            </div>
+
+            <form id="bookingForm" style="font-family: 'Lato', sans-serif;">
+                <div style="margin-bottom: 15px;">
+                    <label for="checkin" style="display: block; margin-bottom: 5px; color: var(--forest-green); font-weight: 500;">Check-in Date:</label>
+                    <input type="date" id="checkin" name="checkin" required style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px;">
+                </div>
+
+                <div style="margin-bottom: 15px;">
+                    <label for="checkout" style="display: block; margin-bottom: 5px; color: var(--forest-green); font-weight: 500;">Check-out Date:</label>
+                    <input type="date" id="checkout" name="checkout" required style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px;">
+                </div>
+
+                <div style="margin-bottom: 15px;">
+                    <label for="room" style="display: block; margin-bottom: 5px; color: var(--forest-green); font-weight: 500;">Room Type:</label>
+                    <select id="room" name="room" required style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px;">
+                        <option value="">Select a room</option>
+                        <option value="standard">Royal Executive Room (N31,000/night)</option>
+                        <option value="Royal deluxe">Royal Deluxe Room (N27,000/night)</option>
+                         <option value="exclusive deluxe">Exclusive Deluxe Room (N31,000/night)</option>
+                        <option value="Queens Lodge">Queens Lodge (N34,000/night)</option>
+                        <option value="Kings Lodge">Kings Lodge (N36,000/night)</option>
+                        <option value="royal-suite">Royal Suite (N45,000/night)</option>
+                        <option value="Senator-suite">Senator Suite (N45,000/night)</option>
+                    </select>
+                </div>
+
+                <div style="margin-bottom: 15px;">
+                    <label for="name" style="display: block; margin-bottom: 5px; color: var(--forest-green); font-weight: 500;">Full Name:</label>
+                    <input type="text" id="name" name="name" required style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px;">
+                </div>
+
+                <div style="margin-bottom: 15px;">
+                    <label for="email" style="display: block; margin-bottom: 5px; color: var(--forest-green); font-weight: 500;">Email:</label>
+                    <input type="email" id="email" name="email" required style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px;">
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <label for="requests" style="display: block; margin-bottom: 5px; color: var(--forest-green); font-weight: 500;">Special Requests:</label>
+                    <textarea id="requests" name="requests" rows="4" style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px; resize: vertical;"></textarea>
+                </div>
+
+                <button type="button" onclick="submitBooking()" style="background: var(--golden-yellow); color: var(--forest-green); padding: 15px 30px; font-size: 18px; font-weight: 600; border: none; border-radius: 50px; cursor: pointer; width: 100%; transition: all 0.3s ease;">
+                    Book Now
+                </button>
+            </form>
+
+            <div id="confirmation" style="margin-top: 25px; padding: 20px; background: #f8f9fa; border-radius: 10px; border-left: 4px solid var(--golden-yellow);"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <h3>Zafike Royal Hotel</h3>
+                        <p class="footer-tagline">Your Royal Experience Awaits</p>
+                    </div>
+                    <p class="footer-description">
+                        Experience luxury and elegance at Zafike Royal Hotel, where every guest is treated like royalty. Creating unforgettable memories since 1985.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/zafikeroyalhotel?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h4 class="footer-title">Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html" class="active">Home</a></li>
+                        <li><a href="room.html">Rooms & Suites</a></li>
+                        <li><a href="amneitites.html">Amenities</a></li>
+                         <li><a href="Meeting.html">Meetings & Events</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4 class="footer-title">Newsletter</h4>
+                    <p style="margin-bottom: 1rem;">Subscribe for exclusive offers and updates</p>
+                    <form id="newsletterForm">
+                        <div style="display: flex; gap: 0.5rem;">
+                            <input type="email" id="newsletterEmail" name="email" placeholder="Your email" style="flex: 1; padding: 0.5rem; border: none; border-radius: 5px;" required>
+                            <button type="submit" style="background: var(--golden-yellow); color: var(--forest-green); border: none; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer;">Subscribe</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="footer-section">
+                    <h4 class="footer-title">Contact Info</h4>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Km 8 Benin-Auchi Express Road,<br>Eyaen, Benin City, Edo State</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+234 703 332 4718, +234 815 263 1194</span>
+                            
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>Zafikeroyalhotel@yahoo.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-clock"></i>
+                            <span>24/7 Front Desk Service</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2024 Zafike Royal Hotel. All rights reserved.</p>
+                   
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+   const mobileMenu = document.querySelector('.mobile-menu');
+    const navMenu = document.querySelector('.nav-menu');
+    const navLinks = document.querySelectorAll('.nav-menu a');
+
+    // Toggle menu on hamburger click
+    mobileMenu.addEventListener('click', function () {
+        navMenu.classList.toggle('active');
+        mobileMenu.classList.toggle('open');
+        document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : 'auto';
+    });
+
+    // Close menu when a link is clicked
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+            mobileMenu.classList.remove('open');
+            document.body.style.overflow = 'auto';
+        });
+    });
+</script>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Testimonial slider
+        let slideIndex = 1;
+        const slides = document.querySelectorAll('.testimonial');
+        const dots = document.querySelectorAll('.dot');
+
+        function showSlide(n) {
+            if (n > slides.length) slideIndex = 1;
+            if (n < 1) slideIndex = slides.length;
+            
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            
+            slides[slideIndex - 1].classList.add('active');
+            dots[slideIndex - 1].classList.add('active');
+        }
+
+        function currentSlide(n) {
+            showSlide(slideIndex = n);
+        }
+
+        // Auto-advance testimonials
+        setInterval(() => {
+            slideIndex++;
+            showSlide(slideIndex);
+        }, 5000);
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Fade in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in elements
+        document.querySelectorAll('.fade-in').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            observer.observe(el);
+        });
+
+        // CTA button click effect
+        document.querySelector('.cta-button').addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Create ripple effect
+            const ripple = document.createElement('span');
+            const rect = this.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            
+            ripple.style.width = ripple.style.height = size + 'px';
+            ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
+            ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
+            ripple.style.position = 'absolute';
+            ripple.style.background = 'rgba(255, 255, 255, 0.3)';
+            ripple.style.borderRadius = '50%';
+            ripple.style.transform = 'scale(0)';
+            ripple.style.animation = 'ripple 0.6s linear';
+            ripple.style.pointerEvents = 'none';
+            
+            this.appendChild(ripple);
+            
+            setTimeout(() => {
+                ripple.remove();
+            }, 600);
+            
+           
+        });
+
+        // Add ripple animation keyframes
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Mobile menu toggle (placeholder for future implementation)
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            // Mobile menu functionality would go here
+            console.log('Mobile menu clicked - implement slide-out menu');
+        });
+
+    
+
+        // Initialize animations on page load
+        window.addEventListener('load', () => {
+            document.body.classList.add('loaded');
+            
+            // Trigger initial fade-in animations
+            setTimeout(() => {
+                document.querySelectorAll('.fade-in').forEach((el, index) => {
+                    setTimeout(() => {
+                        el.style.opacity = '1';
+                        el.style.transform = 'translateY(0)';
+                    }, index * 200);
+                });
+            }, 500);
+        });
+
+        // Booking Modal Functionality
+        const modal = document.getElementById('bookingModal');
+        const openModalBtn = document.getElementById('openBookingModal');
+        const closeModalBtn = document.querySelector('.close');
+        const roomSelect = document.getElementById('room');
+        const previewImage = document.getElementById('previewImage');
+        const bookingForm = document.getElementById('bookingForm');
+        const confirmationDiv = document.getElementById('confirmation');
+
+        // Room preview images (placeholder URLs - you can replace with actual images)
+        const roomImages = {
+            'standard': 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"><rect fill="%23005532" width="400" height="300"/><rect fill="%23CFAF53" width="300" height="200" x="50" y="50"/><circle fill="%23E8D084" cx="200" cy="150" r="40"/></svg>',
+            'deluxe': 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"><rect fill="%23005532" width="400" height="300"/><rect fill="%23CFAF53" width="300" height="200" x="50" y="50"/><circle fill="%23E8D084" cx="150" cy="150" r="40"/><circle fill="%23E8D084" cx="250" cy="150" r="40"/></svg>',
+            'junior-suite': 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"><rect fill="%23005532" width="400" height="300"/><rect fill="%23CFAF53" width="350" height="250" x="25" y="25"/><circle fill="%23E8D084" cx="200" cy="150" r="50"/></svg>',
+            'executive-suite': 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"><rect fill="%23005532" width="400" height="300"/><rect fill="%23CFAF53" width="350" height="250" x="25" y="25"/><circle fill="%23E8D084" cx="200" cy="150" r="60"/><rect fill="%23E8D084" width="100" height="50" x="150" cy="80" opacity="0.7"/></svg>',
+            'royal-suite': 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"><rect fill="%23005532" width="400" height="300"/><rect fill="%23CFAF53" width="350" height="250" x="25" y="25"/><circle fill="%23E8D084" cx="200" cy="150" r="70"/><rect fill="%23E8D084" width="120" height="60" x="140" cy="70" opacity="0.7"/><circle fill="%23E8D084" cx="280" cy="100" r="20" opacity="0.5"/></svg>',
+            'presidential-suite': 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"><rect fill="%23005532" width="400" height="300"/><rect fill="%23CFAF53" width="350" height="250" x="25" y="25"/><circle fill="%23E8D084" cx="200" cy="150" r="80"/><rect fill="%23E8D084" width="150" height="70" x="125" cy="60" opacity="0.7"/><circle fill="%23E8D084" cx="280" cy="100" r="25" opacity="0.5"/><circle fill="%23E8D084" cx="120" cy="100" r="25" opacity="0.5"/></svg>'
+        };
+
+        // Open modal
+        openModalBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        });
+
+        // Close modal
+        closeModalBtn.addEventListener('click', function() {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+            resetForm();
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+                resetForm();
+            }
+        });
+
+        // Room selection change handler
+        roomSelect.addEventListener('change', function() {
+            const selectedRoom = this.value;
+            if (selectedRoom && roomImages[selectedRoom]) {
+                previewImage.src = roomImages[selectedRoom];
+                previewImage.style.display = 'block';
+            } else {
+                previewImage.style.display = 'none';
+            }
+        });
+
+        // Submit booking function
+        function submitBooking() {
+            const checkin = document.getElementById('checkin').value;
+            const checkout = document.getElementById('checkout').value;
+            const room = document.getElementById('room').value;
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const requests = document.getElementById('requests').value;
+
+            // Basic validation
+            if (!checkin || !checkout || !room || !name || !email) {
+                confirmationDiv.innerHTML = '<p style="color: red; font-weight: bold;">Please fill in all required fields.</p>';
+                return;
+            }
+
+            // Calculate number of nights
+            const checkinDate = new Date(checkin);
+            const checkoutDate = new Date(checkout);
+            const nights = Math.ceil((checkoutDate - checkinDate) / (1000 * 60 * 60 * 24));
+            
+            if (nights <= 0) {
+                confirmationDiv.innerHTML = '<p style="color: red; font-weight: bold;">Check-out date must be after check-in date.</p>';
+                return;
+            }
+
+            // Calculate total price
+            const roomPrices = {
+                'Royal Executive': 31000,
+                ' Royal deluxe': 27000,
+                ' Exclusive deluxe': 30000,
+                'Queens Lodge': 34000,
+                'Kings Lodge': 36000,
+                'royal-suite': 45000,
+                'Senator-suite': 45000
+            };
+            const totalPrice = nights * roomPrices[room];
+
+            // Show loading message
+            confirmationDiv.innerHTML = '<p style="color: var(--forest-green); font-weight: bold;">Processing your booking request...</p>';
+
+            // Prepare email data
+            const emailData = {
+                to_email: email,
+                to_name: name,
+                from_name: 'Zafike Royal Hotel',
+                checkin_date: new Date(checkin).toLocaleDateString(),
+                checkout_date: new Date(checkout).toLocaleDateString(),
+                room_type: room.charAt(0).toUpperCase() + room.slice(1) + ' Room',
+                nights: nights,
+                total_price: totalPrice,
+                special_requests: requests || 'None',
+                booking_date: new Date().toLocaleDateString(),
+                booking_time: new Date().toLocaleTimeString()
+            };
+
+            // Send email using EmailJS
+emailjs.send('service_cw1dzj7', 'template_hr882sv', emailData)
+                .then(function(response) {
+                    console.log('Email sent successfully!', response.status, response.text);
+                    
+                    // Show success confirmation
+                    confirmationDiv.innerHTML = `
+                        <h3 style="color: var(--forest-green); margin-bottom: 15px;">Booking Confirmed!</h3>
+                        <p><strong>Name:</strong> ${name}</p>
+                        <p><strong>Email:</strong> ${email}</p>
+                        <p><strong>Check-in:</strong> ${new Date(checkin).toLocaleDateString()}</p>
+                        <p><strong>Check-out:</strong> ${new Date(checkout).toLocaleDateString()}</p>
+                        <p><strong>Nights:</strong> ${nights}</p>
+                        <p><strong>Room Type:</strong> ${room.charAt(0).toUpperCase() + room.slice(1)} Room</p>
+                        <p><strong>Total Price:</strong> $${totalPrice}</p>
+                        ${requests ? `<p><strong>Special Requests:</strong> ${requests}</p>` : ''}
+                        <p style="margin-top: 15px; color: var(--golden-yellow); font-weight: bold;">
+                            Thank you for choosing Zafike Royal Hotel! A confirmation email has been sent to your email address.
+                        </p>
+                    `;
+                })
+                .catch(function(error) {
+                    console.error('Email sending failed:', error);
+                    
+                    // Show error message but still confirm booking
+                    confirmationDiv.innerHTML = `
+                        <h3 style="color: var(--forest-green); margin-bottom: 15px;">Booking Confirmed!</h3>
+                        <p><strong>Name:</strong> ${name}</p>
+                        <p><strong>Email:</strong> ${email}</p>
+                        <p><strong>Check-in:</strong> ${new Date(checkin).toLocaleDateString()}</p>
+                        <p><strong>Check-out:</strong> ${new Date(checkout).toLocaleDateString()}</p>
+                        <p><strong>Nights:</strong> ${nights}</p>
+                        <p><strong>Room Type:</strong> ${room.charAt(0).toUpperCase() + room.slice(1)} Room</p>
+                        <p><strong>Total Price:</strong> $${totalPrice}</p>
+                        ${requests ? `<p><strong>Special Requests:</strong> ${requests}</p>` : ''}
+                        <p style="margin-top: 15px; color: orange; font-weight: bold;">
+                            Thank you for your booking! We'll contact you shortly to confirm your reservation.
+                        </p>
+                    `;
+                });
+
+            // Clear form
+            bookingForm.reset();
+            previewImage.style.display = 'none';
+        }
+
+        // Reset form function
+        function resetForm() {
+            bookingForm.reset();
+            previewImage.style.display = 'none';
+            confirmationDiv.innerHTML = '';
+        }
+
+        // Set minimum date for check-in to today
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('checkin').min = today;
+        document.getElementById('checkout').min = today;
+
+        // Newsletter Form Functionality
+        const newsletterForm = document.getElementById('newsletterForm');
+        const newsletterEmail = document.getElementById('newsletterEmail');
+
+        newsletterForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const email = newsletterEmail.value.trim();
+
+            // Basic email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!email || !emailRegex.test(email)) {
+                alert('Please enter a valid email address.');
+                return;
+            }
+
+            // Show loading state
+            const submitButton = newsletterForm.querySelector('button[type="submit"]');
+            const originalText = submitButton.textContent;
+            submitButton.textContent = 'Subscribing...';
+            submitButton.disabled = true;
+
+            // Prepare email data for newsletter subscription
+            const emailData = {
+                to_email: email,
+                from_name: 'Zafike Royal Hotel',
+                message: 'Thank you for subscribing to our newsletter! You will receive exclusive offers and updates.',
+                subscription_date: new Date().toLocaleDateString()
+            };
+
+            // Send email using EmailJS
+            emailjs.send('service_cw1dzj7', 'template_hr882sv', emailData)
+                .then(function(response) {
+                    console.log('Newsletter subscription email sent successfully!', response.status, response.text);
+
+                    // Show success message
+                    alert('Thank you for subscribing! You will receive exclusive offers and updates.');
+
+                    // Reset form
+                    newsletterForm.reset();
+                })
+                .catch(function(error) {
+                    console.error('Newsletter subscription failed:', error);
+
+                    // Show error message
+                    alert('There was an error subscribing to the newsletter. Please try again later.');
+                })
+                .finally(function() {
+                    // Reset button state
+                    submitButton.textContent = originalText;
+                    submitButton.disabled = false;
+                });
+        });
+    </script>
+
+    <!-- Preloader Hide Script -->
+    <script>
+        window.addEventListener('load', function() {
+            const preloader = document.getElementById('preloader');
+            setTimeout(function() {
+                preloader.classList.add('hidden');
+            }, 1500); // Small delay to ensure smooth transition
+        });
+    </script>
+</body>
+</html>

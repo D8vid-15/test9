@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zafike Royal Hotel Booking</title>
+
+<!-- EmailJS SDK -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script type="text/javascript">
+   (function(){
+       emailjs.init("ipGr_l0BmU7HA__ks"); // Replace with your EmailJS User ID
+   })();
+</script>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        color: #333;
+        padding: 20px;
+    }
+
+    /* Book Now Button */
+    .book-now-btn {
+        background-color: #2e7d32;
+        color: #ffd700;
+        padding: 12px 25px;
+        font-size: 18px;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background 0.3s ease;
+    }
+    .book-now-btn:hover { background-color: #276027; }
+
+    /* Modal Styles */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.6);
+        transition: opacity 0.4s ease;
+    }
+    .modal.show { display: block; }
+
+    .modal-content {
+        background-color: #fff;
+        margin: 5% auto;
+        padding: 20px;
+        border: 2px solid #ffd700;
+        border-radius: 10px;
+        width: 90%;
+        max-width: 500px;
+        transform: translateY(-50px);
+        opacity: 0;
+        transition: all 0.4s ease;
+    }
+    .modal.show .modal-content {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    .close {
+        color: #2e7d32;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+    .close:hover { color: #276027; }
+
+    form input, form select, form textarea, form button {
+        width: 100%;
+        padding: 10px;
+        margin: 5px 0 15px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+    form button {
+        background-color: #2e7d32;
+        color: #ffd700;
+        font-weight: bold;
+        cursor: pointer;
+        border: none;
+        transition: background 0.3s ease;
+    }
+    form button:hover { background-color: #276027; }
+
+    #confirmation {
+        margin-top: 20px;
+        background-color: #fff;
+        padding: 20px;
+        border: 2px solid #ffd700;
+        border-radius: 10px;
+        max-width: 500px;
+    }
+
+    /* Room Image Preview */
+    #roomPreview img {
+        max-width: 100%;
+        border-radius: 10px;
+        border: 2px solid #ffd700;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        transition: transform 0.3s ease;
+    }
+    #roomPreview img:hover {
+        transform: scale(1.05);
+    }
+
+    /* Responsive */
+    @media screen and (max-width: 600px) {
+        .modal-content { width: 95%; padding: 15px; }
+        .book-now-btn { width: 100%; font-size: 16px; padding: 12px; }
+        form input, form select, form textarea, form button { padding: 8px; }
+    }
+</style>
+</head>
+<body>
+
+<!-- Book Now Button -->
+<button id="openBooking" class="book-now-btn">Book Now</button>
+
+<!-- Booking Modal -->
+<div id="bookingModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Book Your Stay at Zafike Royal Hotel</h2>
+
+        <!-- Room Preview -->
+        <div id="roomPreview" style="text-align:center; margin-bottom:15px;">
+            <img id="previewImage" src="" alt="Room Preview" style="display:none;">
+        </div>
+
+        <form id="bookingForm">
+            <label for="checkin">Check-in Date:</label>
+            <input type="date" id="checkin" name="checkin" required>
+
+            <label for="checkout">Check-out Date:</label>
+            <input type="date" id="checkout" name="checkout" required>
+
+            <label for="room">Room Type:</label>
+            <select id="room" name="room" required>
+                <option value="">Select a room</option>
+                <option value="single">Single</option>
+                <option value="double">Double</option>
+                <option value="suite">Suite</option>
+            </select>
+
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="requests">Special Requests:</label>
+            <textarea id="requests" name="requests" rows="4" cols="30"></textarea>
+
+            <button type="button" onclick="submitBooking()">Book Now</button>
+        </form>
+
+        <div id="confirmation"></div>
+    </div>
+</div>
+
+<script>
+    const roomPrices = { single: 100, double: 180, suite: 300 };
+
+    // Room Images (replace URLs with your actual images)
+    const roomImages = {
+        single: 'images/single-room.jpg',
+        double: 'images/double-room.jpg',
+        suite: 'images/suite-room.jpg'
+    };
+
+    // Modal Logic
+    const modal = document.getElementById("bookingModal");
+    const btn = document.getElementById("openBooking");
+    const span = document.getElementsByClassName("close")[0];
+
+    btn.onclick = () => modal.classList.add("show");
+    span.onclick = () => modal.classList.remove("show");
+    window.onclick = event => { if(event.target == modal) modal.classList.remove("show"); }
+
+    // Update Room Preview
+    document.getElementById('room').addEventListener('change', function() {
+        const selectedRoom = this.value;
+        const preview = document.getElementById('previewImage');
+        if (selectedRoom && roomImages[selectedRoom]) {
+            preview.src = roomImages[selectedRoom];
+            preview.style.display = 'block';
+        } else {
+            preview.style.display = 'none';
+        }
+    });
+
+    // Booking Function
+    function submitBooking() {
+        const checkin = document.getElementById('checkin').value;
+        const checkout = document.getElementById('checkout').value;
+        const room = document.getElementById('room').value;
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const requests = document.getElementById('requests').value;
+
+        if(!checkin || !checkout || !room || !name || !email){
+            alert("Please fill all required fields!"); return;
+        }
+
+        const nights = (new Date(checkout) - new Date(checkin))/(1000*3600*24);
+        if(nights <= 0){ alert("Check-out must be after check-in."); return; }
+
+        const totalPrice = roomPrices[room]*nights;
+
+        const confirmation = `
+            <h3>Booking Confirmed!</h3>
+            <p>Thank you, ${name}, for booking with us.</p>
+            <p>Room Type: ${room}</p>
+            <p>Stay: ${nights} night(s) from ${checkin} to ${checkout}</p>
+            <p>Total Price: $${totalPrice}</p>
+            <p>Special Requests: ${requests ? requests : 'None'}</p>
+            <p>A confirmation email has been sent to ${email}.</p>
+        `;
+
+        document.getElementById('confirmation').innerHTML = confirmation;
+        sendEmail(name,email,room,checkin,checkout,nights,requests,totalPrice);
+    }
+
+    // Payment Simulation
+    function simulatePayment(amount){
+        alert(`Payment of $${amount} successful! Thank you for booking with Zafike Royal Hotel.`);
+    }
+
+    // EmailJS Function (requires proper setup)
+    function sendEmail(name, email, room, checkin, checkout, nights, requests, totalPrice) {
+        const templateParams = {
+            to_name: name,
+            to_email: email,
+            room_type: room.charAt(0).toUpperCase() + room.slice(1),
+            checkin_date: checkin,
+            checkout_date: checkout,
+            nights_stay: nights,
+            special_requests: requests || 'None',
+            total_price: `$${totalPrice}`,
+            hotel_name: 'Zafike Royal Hotel',
+            hotel_contact: 'info@zafikeroyal.com'
+        };
+        
+        // Replace with your actual EmailJS service and template IDs
+        console.log('Email would be sent with parameters:', templateParams);
+        /*
+        emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", templateParams)
+            .then(response => {
+                console.log('Email sent successfully!', response.status, response.text);
+            })
+            .catch(error => {
+                console.log('Email sending failed:', error);
+            });
+        */
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1986 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rooms & Suites - Zafike Royal Hotel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- EmailJS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>
+        // Initialize EmailJS
+        (function() {
+            emailjs.init("ipGr_l0BmU7HA__ks");
+        })();
+    </script>
+    <style>
+       * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --forest-green: #005532;
+            --golden-yellow: #CFAF53;
+            --light-gold: #E8D084;
+            --white: #ffffff;
+            --light-gray: #f8f9fa;
+            --text-dark: #2c3e50;
+            --shadow-light: 0 4px 20px rgba(0, 85, 50, 0.1);
+            --shadow-medium: 0 8px 30px rgba(0, 85, 50, 0.15);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--forest-green);
+            z-index: 1000;
+            padding: 1rem 0;
+            box-shadow: var(--shadow-medium);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--golden-yellow);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 400;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .nav-menu a.active,
+        .nav-menu a:hover {
+            color: var(--golden-yellow);
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--golden-yellow);
+            transition: var(--transition);
+        }
+
+        .nav-menu a:hover::after,
+        .nav-menu a.active::after {
+            width: 100%;
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .mobile-menu span {
+            width: 25px;
+            height: 3px;
+            background: var(--white);
+            margin: 3px 0;
+            transition: var(--transition);
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            background: var(--light-gray);
+            padding: 1rem 0;
+        }
+
+        .breadcrumb-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .breadcrumb-nav {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb-nav a {
+            color: var(--forest-green);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .breadcrumb-nav a:hover {
+            color: var(--golden-yellow);
+        }
+
+        .breadcrumb-nav span {
+            color: var(--text-dark);
+        }
+
+        /* Page Header */
+        .page-header {
+            height: 50vh;
+            background: linear-gradient(135deg, rgba(0, 85, 50, 0.8), rgba(207, 175, 83, 0.3)),
+                        url(image/rtoom.jpg);
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            margin-top: 80px;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, 
+                rgba(0, 85, 50, 0.9) 0%, 
+                rgba(0, 85, 50, 0.7) 50%, 
+                rgba(207, 175, 83, 0.5) 100%);
+            z-index: 1;
+        }
+
+        .page-header-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 2rem;
+        }
+
+        .page-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .page-subtitle {
+            font-size: 1.3rem;
+            color: var(--light-gold);
+            font-style: italic;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            background: var(--light-gray);
+            padding: 1rem 0;
+        }
+
+        .breadcrumb-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .breadcrumb-nav {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb-nav a {
+            color: var(--forest-green);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .breadcrumb-nav a:hover {
+            color: var(--golden-yellow);
+        }
+
+        .breadcrumb-nav span {
+            color: var(--text-dark);
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 6rem 0;
+            background: var(--white);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 4rem;
+        }
+
+        .intro-text {
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            line-height: 1.8;
+        }
+
+        /* Room Filter */
+        .room-filter {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 4rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.8rem 2rem;
+            background: transparent;
+            border: 2px solid var(--forest-green);
+            color: var(--forest-green);
+            font-weight: 500;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'Lato', sans-serif;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--forest-green);
+            color: var(--white);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-light);
+        }
+
+        /* Room Grid */
+        .room-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .room-card {
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-light);
+            transition: var(--transition);
+            position: relative;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .room-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-strong);
+        }
+
+        .room-card:nth-child(1) { animation-delay: 0.1s; }
+        .room-card:nth-child(2) { animation-delay: 0.2s; }
+        .room-card:nth-child(3) { animation-delay: 0.3s; }
+        .room-card:nth-child(4) { animation-delay: 0.4s; }
+        .room-card:nth-child(5) { animation-delay: 0.5s; }
+        .room-card:nth-child(6) { animation-delay: 0.6s; }
+
+        .room-image {
+            height: 280px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .room-image.royal-executive {
+            background-image: url(image/royalexe.png);
+            background-size: cover;
+            background-position: center;
+        }
+
+        .room-image.royal-deluxe {
+            background-image: url(image/royaldeluxe.png);
+            background-size: cover;
+            background-position: center;
+        }
+
+        .room-image.exclusive-deluxe {
+            background-image: url(image/deluxe.JPG);
+            background-size: cover;
+            background-position: center;
+        }
+
+        .room-image.queens-lodge {
+            background-image: url(image/queennn.png);
+            background-size: cover;
+            background-position: center;
+        }
+
+        .room-image.kings-lodge {
+            background-image: url(image/kingg.png);
+            background-size: cover;
+            background-position: center;
+        }
+
+        .room-image.royal-suite {
+            background-size: cover;
+            background-position: center;
+            transition: background-image 0.5s ease-in-out;
+        }
+
+        .room-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            transition: opacity 0.5s ease;
+            z-index: 0;
+        }
+
+        .room-image.senator-suite {
+            background-size: cover;
+            background-position: center;
+            transition: background-image 0.5s ease-in-out;
+        }
+
+        .room-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, 
+                rgba(0, 85, 50, 0.3) 0%, 
+                rgba(207, 175, 83, 0.3) 100%);
+            z-index: 1;
+        }
+
+        .room-image::after {
+            content: attr(data-room-type);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            z-index: 2;
+        }
+
+        .room-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--golden-yellow);
+            color: var(--forest-green);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 3;
+        }
+
+        .room-content {
+            padding: 2rem;
+        }
+
+        .room-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .room-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--forest-green);
+            margin-bottom: 0.5rem;
+        }
+
+        .room-price {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--golden-yellow);
+        }
+
+        .room-price span {
+            font-size: 0.9rem;
+            color: var(--text-dark);
+            font-weight: 400;
+        }
+
+        .room-description {
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .room-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .feature-tag {
+            background: var(--light-gray);
+            color: var(--text-dark);
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .feature-tag i {
+            color: var(--golden-yellow);
+        }
+
+        .room-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            background: var(--golden-yellow);
+            color: var(--forest-green);
+        }
+
+        .btn-primary:hover {
+            background: var(--light-gold);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-light);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--forest-green);
+            border: 2px solid var(--forest-green);
+        }
+
+        .btn-secondary:hover {
+            background: var(--forest-green);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        /* Room Details Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            background: var(--white);
+            border-radius: 20px;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            margin: 2rem;
+            animation: slideInUp 0.3s ease;
+        }
+
+        .modal-header {
+            position: relative;
+            height: 300px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 20px 20px 0 0;
+        }
+
+        .modal-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 85, 50, 0.4), rgba(207, 175, 83, 0.3));
+            z-index: 2;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: var(--transition);
+            z-index: 10;
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        .modal-room-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--forest-green);
+            margin-bottom: 1rem;
+        }
+
+        .modal-room-details {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .room-amenities {
+            margin-top: 2rem;
+        }
+
+        .amenities-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--forest-green);
+            margin-bottom: 1rem;
+        }
+
+        .amenities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .amenity-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.5rem;
+        }
+
+        .amenity-item i {
+            color: var(--golden-yellow);
+            width: 20px;
+        }
+
+        /* Special Offers */
+        .special-offers {
+            background: var(--light-gray);
+            padding: 6rem 0;
+        }
+
+        .offers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .offer-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow-light);
+            text-align: center;
+            transition: var(--transition);
+            border: 3px solid transparent;
+        }
+
+        .offer-card:hover {
+            border-color: var(--golden-yellow);
+            transform: translateY(-5px);
+        }
+
+        .offer-icon {
+            font-size: 3rem;
+            color: var(--golden-yellow);
+            margin-bottom: 1rem;
+        }
+
+        .offer-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--forest-green);
+            margin-bottom: 1rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        height: 100vh;
+        width: 100%;
+        background: var(--forest-green); /* or any background */
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 999;
+        gap: 2rem;
+        transition: right 0.3s ease;
+    }
+
+    .nav-menu.active {
+        right: 0;
+    }
+
+   /* Animate to "X" */
+.mobile-menu.open span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.mobile-menu.open span:nth-child(2) {
+    opacity: 0;
+}
+
+.mobile-menu.open span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+}
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .page-title {
+                font-size: 2.5rem;
+            }
+
+            .room-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .room-card {
+                margin: 0 1rem;
+            }
+
+            .room-actions {
+                flex-direction: column;
+            }
+
+            .modal-content {
+                margin: 1rem;
+                max-height: 95vh;
+            }
+
+            .modal-room-details {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .amenities-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .room-filter {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+        }
+
+        /* Keyframes for animations */
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        @keyframes glow {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.8; }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Preloader Styles */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--forest-green), rgba(0, 85, 50, 0.95));
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1), visibility 1s ease;
+            backdrop-filter: blur(2px);
+        }
+
+        .preloader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .preloader-content {
+            text-align: center;
+            color: var(--white);
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .crown-container {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        .crown-spinner {
+            font-size: 5rem;
+            color: var(--golden-yellow);
+            animation: spin 3s linear infinite, pulse 2s ease-in-out infinite;
+            filter: drop-shadow(0 0 20px rgba(207, 175, 83, 0.5));
+            position: relative;
+            z-index: 2;
+        }
+
+        .crown-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle, rgba(207, 175, 83, 0.3) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: glow 2s ease-in-out infinite alternate;
+            z-index: 1;
+        }
+
+        .orbiting-dots {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120px;
+            height: 120px;
+            z-index: 1;
+        }
+
+        .orbiting-dot {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: var(--golden-yellow);
+            border-radius: 50%;
+            animation: orbit 3s linear infinite;
+            filter: drop-shadow(0 0 5px rgba(207, 175, 83, 0.5));
+        }
+
+        .orbiting-dot:nth-child(1) { animation-delay: 0s; }
+        .orbiting-dot:nth-child(2) { animation-delay: 0.5s; }
+        .orbiting-dot:nth-child(3) { animation-delay: 1s; }
+        .orbiting-dot:nth-child(4) { animation-delay: 1.5s; }
+        .orbiting-dot:nth-child(5) { animation-delay: 2s; }
+        .orbiting-dot:nth-child(6) { animation-delay: 2.5s; }
+
+        @keyframes orbit {
+            0% { transform: rotate(0deg) translateX(60px) rotate(0deg); }
+            100% { transform: rotate(360deg) translateX(60px) rotate(-360deg); }
+        }
+
+        .loading-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin: 1.5rem 0;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            background: var(--golden-yellow);
+            border-radius: 50%;
+            animation: bounce 1.4s ease-in-out infinite both;
+        }
+
+        .dot:nth-child(1) { animation-delay: -0.32s; }
+        .dot:nth-child(2) { animation-delay: -0.16s; }
+        .dot:nth-child(3) { animation-delay: 0s; }
+
+        .preloader-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--light-gold);
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            letter-spacing: 2px;
+        }
+
+        .preloader-subtitle {
+            font-size: 1.1rem;
+            color: var(--white);
+            opacity: 0.9;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Preloader -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-content">
+            <div class="crown-container">
+                <i class="fas fa-crown crown-spinner"></i>
+                <div class="crown-glow"></div>
+            </div>
+            <div class="loading-dots">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+            <h2 class="preloader-text">Zafike Royal Hotel</h2>
+            <p class="preloader-subtitle">Your Royal Experience Begins Here</p>
+            <div class="orbiting-dots">
+                <div class="orbiting-dot"></div>
+                <div class="orbiting-dot"></div>
+                <div class="orbiting-dot"></div>
+                <div class="orbiting-dot"></div>
+                <div class="orbiting-dot"></div>
+                <div class="orbiting-dot"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">Zafike Royal Hotel</a>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="room.html" class="active">Rooms & Suites</a></li>
+                <li><a href="amneitites.html">Amenities</a></li>
+                <li><a href="Meeting.html" >Meetings & Events</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="page-header-content">
+            <h1 class="page-title">Rooms & Suites</h1>
+            <p class="page-subtitle">Luxury accommodations tailored to your comfort</p>
+        </div>
+    </section>
+
+    <!-- Breadcrumb -->
+    <section class="breadcrumb">
+        <div class="breadcrumb-container">
+            <nav class="breadcrumb-nav">
+                <a href="index.html">Home</a>
+                <i class="fas fa-chevron-right"></i>
+                <span>Rooms & Suites</span>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="main-content">
+        <div class="container">
+            <div class="section-intro">
+                <p class="intro-text">
+                    Discover our collection of elegantly appointed rooms and suites, each designed to provide the ultimate in comfort and luxury. From our cozy standard rooms to our opulent royal suites, every accommodation features premium amenities, sophisticated décor, and impeccable service that defines the Zafike Royal experience.
+                </p>
+            </div>
+
+            <!-- Room Filter -->
+            <div class="room-filter">
+                <button class="filter-btn active" data-filter="all">All Rooms</button>
+                <button class="filter-btn" data-filter="Royal Executive">Royal Executive</button>
+                <button class="filter-btn" data-filter="deluxe">Deluxe</button>
+                <button class="filter-btn" data-filter="suite">Suites</button>
+                 <button class="filter-btn" data-filter="Lodge">Lodge</button>
+            </div>
+
+            <!-- Room Grid -->
+            <div class="room-grid" id="roomGrid">
+                <!-- Royal Executive Room -->
+                <div class="room-card" data-category="Royal Executive">
+                    <div class="room-image royal-executive" data-room-type="Royal Executive Room">
+                        <div class="room-badge">Popular</div>
+                    </div>
+                    <div class="room-content">
+                        <div class="room-header">
+                            <div>
+                                <h3 class="room-title">Royal Executive Room</h3>
+                                
+                            </div>
+                        </div>
+                        <p class="room-description">
+                            Comfortable and elegantly designed, our Standard Rooms offer all essential amenities for a pleasant stay with modern furnishings and city views.
+                        </p>
+                        <div class="room-features">
+                            <span class="feature-tag"><i class="fas fa-wifi"></i> Free Wi-Fi</span>
+                            <span class="feature-tag"><i class="fas fa-snowflake"></i> Air Conditioning</span>
+                            <span class="feature-tag"><i class="fas fa-tv"></i> Smart TV</span>
+                          <span class="feature-tag"><i class="fas fa-bath"></i> Luxury Bathroom</span>
+                            <span class="feature-tag"><i class="fas fa-bed"></i> Kings Bed</span>
+                             <span class="feature-tag"><i class="fas fa-utensils"></i> Complimentary Breakfast</span>
+                        </div>
+                        <div class="room-actions">
+                            <a href="#" class="btn btn-primary" onclick="bookRoom('Royal Executive Room', 31000)">
+                                <i class="fas fa-calendar-check"></i> Book Now
+                            </a>
+                            <a href="#" class="btn btn-secondary" onclick="viewDetails('Royal Executive')">
+                                <i class="fas fa-eye"></i> View Details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Royal Deluxe Room -->
+                <div class="room-card" data-category="deluxe">
+                    <div class="room-image royal-deluxe" data-room-type="Royal Deluxe Room"></div>
+                    <div class="room-content">
+                        <div class="room-header">
+                            <div>
+                                <h3 class="room-title">Royal Deluxe Room</h3>
+                                
+                            </div>
+                        </div>
+                        <p class="room-description">
+                            Spacious and sophisticated, our Deluxe Rooms feature premium amenities, elegant décor, and enhanced comfort for discerning guests.
+                        </p>
+                        <div class="room-features">
+                            <span class="feature-tag"><i class="fas fa-wifi"></i> Free Wi-Fi</span>
+                            <span class="feature-tag"><i class="fas fa-snowflake"></i> Air Conditioning</span>
+                            <span class="feature-tag"><i class="fas fa-tv"></i> Smart TV</span>
+                            <span class="feature-tag"><i class="fas fa-bath"></i> Luxury Bathroom</span>
+                            <span class="feature-tag"><i class="fas fa-bed"></i> King Bed</span>
+                            <span class="feature-tag"><i class="fas fa-couch"></i> Seating Area</span>
+                        </div>
+                        <div class="room-actions">
+                            <a href="#" class="btn btn-primary" onclick="bookRoom('Royal Deluxe Room', 27000)">
+                                <i class="fas fa-calendar-check"></i> Book Now
+                            </a>
+                            <a href="#" class="btn btn-secondary" onclick="viewDetails('Royal deluxe')">
+                                <i class="fas fa-eye"></i> View Details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Exclusive Deluxe Room -->
+                <div class="room-card" data-category="deluxe">
+                    <div class="room-image exclusive-deluxe" data-room-type="Exclusive Deluxe Room"></div>
+                    <div class="room-content">
+                        <div class="room-header">
+                            <div>
+                                <h3 class="room-title">Exclusive Deluxe Room</h3>
+                                
+                            </div>
+                        </div>
+                        <p class="room-description">
+                            Spacious and sophisticated, our Deluxe Rooms feature premium amenities, elegant décor, and enhanced comfort for discerning guests.
+                        </p>
+                        <div class="room-features">
+                            <span class="feature-tag"><i class="fas fa-wifi"></i> Free Wi-Fi</span>
+                            <span class="feature-tag"><i class="fas fa-snowflake"></i> Air Conditioning</span>
+                            <span class="feature-tag"><i class="fas fa-tv"></i> Smart TV</span>
+                            <span class="feature-tag"><i class="fas fa-bath"></i> Luxury Bathroom</span>
+                            <span class="feature-tag"><i class="fas fa-bed"></i> King Bed</span>
+                            <span class="feature-tag"><i class="fas fa-couch"></i> Seating Area</span>
+                        </div>
+                        <div class="room-actions">
+                            <a href="#" class="btn btn-primary" onclick="bookRoom('Exclusive Deluxe Room', 30000)">
+                                <i class="fas fa-calendar-check"></i> Book Now
+                            </a>
+                            <a href="#" class="btn btn-secondary" onclick="viewDetails('Exclusive deluxe')">
+                                <i class="fas fa-eye"></i> View Details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+
+                <!-- Queens Lodge-->
+                <div class="room-card" data-category="Lodge">
+                    <div class="room-image queens-lodge" data-room-type="Queens Lodge"></div>
+                    <div class="room-content">
+                        <div class="room-header">
+                            <div>
+                                <h3 class="room-title">Queens Lodge</h3>
+                               
+                            </div>
+                        </div>
+                        <p class="room-description">
+                            Experience luxury living in our Queens Lodge, featuring separate living areas, premium furnishings, and exclusive amenities.
+                        </p>
+                        <div class="room-features">
+                            <span class="feature-tag"><i class="fas fa-wifi"></i> Free Wi-Fi</span>
+                            <span class="feature-tag"><i class="fas fa-snowflake"></i> Climate Control</span>
+                            <span class="feature-tag"><i class="fas fa-tv"></i> Premium TV</span>
+                            <span class="feature-tag"><i class="fas fa-spa"></i> Luxury Bathroom</span>
+                            <span class="feature-tag"><i class="fas fa-bed"></i> Queens Bed</span>
+                            <span class="feature-tag"><i class="fas fa-couch"></i> Sitting Area</span>
+                            <span class="feature-tag"><i class="fas fa-coffee"></i> MiniTable</span>
+                             <span class="feature-tag"><i class="fas fa-utensils"></i> Complimentary Breakfast</span>
+                        </div>
+                        <div class="room-actions">
+                            <a href="#" class="btn btn-primary" onclick="bookRoom('Queens Lodge', 34000)">
+                                <i class="fas fa-calendar-check"></i> Book Now
+                            </a>
+                            <a href="#" class="btn btn-secondary" onclick="viewDetails('Queens Lodge')">
+                                <i class="fas fa-eye"></i> View Details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kings Lodge -->
+                <div class="room-card" data-category="Lodge">
+                    <div class="room-image kings-lodge" data-room-type="Kings Lodge">
+                        <div class="room-badge">Premium</div>
+                    </div>
+                    <div class="room-content">
+                        <div class="room-header">
+                            <div>
+                                <h3 class="room-title">Kings Lodge</h3>
+                                
+                            </div>
+                        </div>
+                        <p class="room-description">
+                            Our Kings Lodge offer unparalleled luxury with spacious layouts, premium amenities, and personalized concierge service.
+                        </p>
+                        <div class="room-features">
+                            <span class="feature-tag"><i class="fas fa-wifi"></i> Premium Wi-Fi</span>
+                            <span class="feature-tag"><i class="fas fa-wind"></i> Climate Control</span>
+                            <span class="feature-tag"><i class="fas fa-tv"></i> Entertainment System</span>
+                            <span class="feature-tag"><i class="fas fa-spa"></i> Luxury Bathroom</span>
+                            <span class="feature-tag"><i class="fas fa-bed"></i> California King</span>
+                            <span class="feature-tag"><i class="fas fa-utensils"></i> Dining Area</span>
+                            <span class="feature-tag"><i class="fas fa-concierge-bell"></i> Concierge</span>
+                             <span class="feature-tag"><i class="fas fa-utensils"></i> Complimentary Breakfast</span>
+                        </div>
+                        <div class="room-actions">
+                            <a href="#" class="btn btn-primary" onclick="bookRoom('Kings Lodge', 36000)">
+                                <i class="fas fa-calendar-check"></i> Book Now
+                            </a>
+                            <a href="#" class="btn btn-secondary" onclick="viewDetails('Kings Lodge')">
+                                <i class="fas fa-eye"></i> View Details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Royal Suite -->
+                <div class="room-card" data-category="suite">
+                    <div class="room-image royal-suite" data-room-type="Royal Suite">
+                        <div class="room-badge">Luxury</div>
+                    </div>
+                    <div class="room-content">
+                        <div class="room-header">
+                            <div>
+                                <h3 class="room-title">Royal Suite</h3>
+                                
+                            </div>
+                        </div>
+                        <p class="room-description">
+                            The pinnacle of luxury accommodation. Our Royal Suite features opulent furnishings, panoramic views, and exclusive services fit for royalty.
+                        </p>
+                        <div class="room-features">
+                            <span class="feature-tag"><i class="fas fa-wifi"></i> Premium Wi-Fi</span>
+                            <span class="feature-tag"><i class="fas fa-wind"></i> Smart Climate</span>
+                            <span class="feature-tag"><i class="fas fa-tv"></i> Home Theater</span>
+                            <span class="feature-tag"><i class="fas fa-spa"></i> Luxury Bathroom</span>
+                            <span class="feature-tag"><i class="fas fa-bed"></i> Master Bedroom</span>
+                            <span class="feature-tag"><i class="fas fa-utensils"></i> Private Dining</span>
+                            <span class="feature-tag"><i class="fas fa-concierge-bell"></i> Butler Service</span>
+                             <span class="feature-tag"><i class="fas fa-utensils"></i> Complimentary Breakfast</span>
+                            
+                        </div>
+                        <div class="room-actions">
+                            <a href="#" class="btn btn-primary" onclick="bookRoom('Royal Suite', 45000)">
+                                <i class="fas fa-calendar-check"></i> Book Now
+                            </a>
+                            <a href="#" class="btn btn-secondary" onclick="viewDetails('royal-suite')">
+                                <i class="fas fa-eye"></i> View Details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Senator Suite -->
+                <div class="room-card" data-category="suite">
+                    <div class="room-image senator-suite" data-room-type="Senator Suite">
+                        <div class="room-badge">Ultimate</div>
+                    </div>
+                    <div class="room-content">
+                        <div class="room-header">
+                            <div>
+                                <h3 class="room-title">Senator Suite</h3>
+                                
+                            </div>
+                        </div>
+                        <p class="room-description">
+                            The ultimate luxury experience. Our Senator Suite spans multiple rooms with private terrace, dedicated staff, and world-class amenities.
+                        </p>
+                        <div class="room-features">
+                            <span class="feature-tag"><i class="fas fa-crown"></i> VIP Treatment</span>
+                             <span class="feature-tag"><i class="fas fa-wifi"></i> Premium Wi-Fi</span>
+                             <span class="feature-tag"><i class="fas fa-wind"></i> Smart Climate</span>
+                            <span class="feature-tag"><i class="fas fa-bed"></i> Fine suite</span>
+                            <span class="feature-tag"><i class="fas fa-concierge-bell"></i> Butler Service</span>
+                            <span class="feature-tag"><i class="fas fa-utensils"></i> Complimentary Breakfast</span>
+                            <span class="feature-tag"><i class="fas fa-spa"></i> Luxury Bathroom</span>
+                        </div>
+                        <div class="room-actions">
+                            <a href="#" class="btn btn-primary" onclick="bookRoom('Senator Suite', 45000)">
+                                <i class="fas fa-calendar-check"></i> Book Now
+                            </a>
+                            <a href="#" class="btn btn-secondary" onclick="viewDetails('Senator-suite')">
+                                <i class="fas fa-eye"></i> View Details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Special Offers Section -->
+    <section class="special-offers">
+        <div class="container">
+            <div class="section-intro">
+                <h2 style="font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--forest-green); margin-bottom: 1rem; text-align: center;">Special Offers</h2>
+                <p class="intro-text">
+                    Take advantage of our exclusive deals and packages designed to make your stay even more memorable and affordable.
+                </p>
+            </div>
+            
+            <div class="offers-grid">
+                <div class="offer-card">
+                    <div class="offer-icon">
+                        <i class="fas fa-percent"></i>
+                    </div>
+                    <h3 class="offer-title">Early Bird Special</h3>
+                    <p>Book 30 days in advance and save up to 15% on all room types. Perfect for planned getaways and business trips.</p>
+                    <a href="#" class="btn btn-primary" style="margin-top: 1rem;">Learn More</a>
+                </div>
+                
+                <div class="offer-card">
+                    <div class="offer-icon">
+                        <i class="fas fa-calendar-week"></i>
+                    </div>
+                    <h3 class="offer-title">Extended Stay</h3>
+                    <p>Stay 7 nights or more and enjoy 10% off plus complimentary breakfast and airport transfers.</p>
+                    <a href="#" class="btn btn-primary" style="margin-top: 1rem;">Learn More</a>
+                </div>
+                
+                <div class="offer-card">
+                    <div class="offer-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3 class="offer-title">Romance Package</h3>
+                    <p>Romantic suite upgrade, champagne, rose petals. Perfect for special occasions.</p>
+                    <a href="#" class="btn btn-primary" style="margin-top: 1rem;">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Modal -->
+    <div id="bookingModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="modal-close" onclick="closeBookingModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <h2 class="modal-room-title">Book Your Stay at Zafike Royal Hotel</h2>
+                <form id="bookingForm" onsubmit="submitBooking(event)">
+                    <label for="checkin">Check-in Date:</label>
+                    <input type="date" id="checkin" name="checkin" required min="">
+
+                    <label for="checkout">Check-out Date:</label>
+                    <input type="date" id="checkout" name="checkout" required>
+
+                    <label for="room">Room Type:</label>
+                    <input type="text" id="room" name="room" required readonly>
+
+                    <input type="hidden" id="price" name="price">
+
+                    <label for="name">Full Name:</label>
+                    <input type="text" id="name" name="name" required>
+
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+
+                    <label for="requests">Special Requests:</label>
+                    <textarea id="requests" name="requests" rows="4" cols="30"></textarea>
+
+                    <button type="submit" class="btn btn-primary" style="margin-top: 1rem; width: 100%;">
+                        <i class="fas fa-calendar-check"></i> Book Now
+                    </button>
+                </form>
+                <div id="confirmation"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Room Details Modal -->
+    <div id="roomModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header" id="modalHeader">
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <h2 class="modal-room-title" id="modalTitle">Room Title</h2>
+                <div class="modal-room-details">
+                    <div id="modalDescription">
+                        <p>Detailed room description will appear here...</p>
+                    </div>
+                    <div>
+                        <h3 style="color: var(--golden-yellow); font-size: 1.5rem; margin-bottom: 1rem;">Starting from</h3>
+                        <div style="font-size: 2rem; font-weight: 600; color: var(--forest-green);" id="modalPrice">N27000</div>
+                        <p style="color: var(--text-dark); margin-top: 0.5rem;">per night</p>
+                        <a href="#" class="btn btn-primary" style="margin-top: 1rem; width: 100%;" id="modalBookBtn">
+                            <i class="fas fa-calendar-check"></i> Book This Room
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="room-amenities">
+                    <h3 class="amenities-title">Room Amenities</h3>
+                    <div class="amenities-grid" id="modalAmenities">
+                        <!-- Amenities will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer style="background: var(--forest-green); color: var(--white); padding: 4rem 0 2rem;">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
+                <div>
+                    <h3 style="font-family: 'Playfair Display', serif; color: var(--golden-yellow); margin-bottom: 1rem;">Zafike Royal Hotel</h3>
+                    <p style="line-height: 1.6; margin-bottom: 1rem;">Experience luxury and comfort in the heart of the city. Your royal experience begins here.</p>
+                    <div style="display: flex; gap: 1rem;">
+                        <a href="#" style="color: var(--golden-yellow); font-size: 1.2rem; transition: var(--transition);"><i class="fab fa-facebook"></i></a>
+                        <a href="#" style="color: var(--golden-yellow); font-size: 1.2rem; transition: var(--transition);"><i class="fab fa-instagram"></i></a>
+                        <a href="#" style="color: var(--golden-yellow); font-size: 1.2rem; transition: var(--transition);"><i class="fab fa-twitter"></i></a>
+                        <a href="#" style="color: var(--golden-yellow); font-size: 1.2rem; transition: var(--transition);"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 style="color: var(--golden-yellow); margin-bottom: 1rem;">Quick Links</h4>
+                    <ul style="list-style: none;">
+                        <li style="margin-bottom: 0.5rem;"><a href="index.html" style="color: var(--white); text-decoration: none; transition: var(--transition);">Home</a></li>
+                        <li style="margin-bottom: 0.5rem;"><a href="room.html" style="color: var(--white); text-decoration: none; transition: var(--transition);">Rooms & Suites</a></li>
+                        <li style="margin-bottom: 0.5rem;"><a href="amneitites.html" style="color: var(--white); text-decoration: none; transition: var(--transition);">Amenities</a></li>
+                         <li style="margin-bottom: 0.5rem;"><a href="Meeting.html" style="color: var(--white); text-decoration: none; transition: var(--transition);">Meetings & Events</a></li>
+                        <li style="margin-bottom: 0.5rem;"><a href="gallery.html" style="color: var(--white); text-decoration: none; transition: var(--transition);">Gallery</a></li>
+                        <li style="margin-bottom: 0.5rem;"><a href="about.html" style="color: var(--white); text-decoration: none; transition: var(--transition);">About Us</a></li>
+                        <li style="margin-bottom: 0.5rem;"><a href="contact.html" style="color: var(--white); text-decoration: none; transition: var(--transition);">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 style="color: var(--golden-yellow); margin-bottom: 1rem;">Contact Info</h4>
+                    <div style="display: flex; align-items: center; margin-bottom: 0.5rem;">
+                        <i class="fas fa-map-marker-alt" style="color: var(--golden-yellow); width: 20px; margin-right: 0.5rem;"></i>
+                        <span>Km 8 Benin-Auchi Express Road,<br>Eyaen, Benin City, Edo State</span>
+                    </div>
+                    <div style="display: flex; align-items: center; margin-bottom: 0.5rem;">
+                        <i class="fas fa-phone" style="color: var(--golden-yellow); width: 20px; margin-right: 0.5rem;"></i>
+                        <span>+234 703 332 4718, +234 815 263 1194</span>
+                    </div>
+                    <div style="display: flex; align-items: center; margin-bottom: 0.5rem;">
+                        <i class="fas fa-envelope" style="color: var(--golden-yellow); width: 20px; margin-right: 0.5rem;"></i>
+                        <span>Zafikeroyalhotel@yahoo.com</span>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 style="color: var(--golden-yellow); margin-bottom: 1rem;">Newsletter</h4>
+                    <p style="margin-bottom: 1rem;">Subscribe for exclusive offers and updates</p>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <input type="email" id="newsletterEmail" placeholder="Your email" style="flex: 1; padding: 0.5rem; border: none; border-radius: 5px;">
+                        <button id="newsletterBtn" style="background: var(--golden-yellow); color: var(--forest-green); border: none; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer;">Subscribe</button>
+                    </div>
+                    <div id="newsletterMessage" style="margin-top: 0.5rem;"></div>
+                </div>
+            </div>
+            
+            <div style="border-top: 1px solid rgba(255,255,255,0.2); padding-top: 2rem; text-align: center;">
+                <p>&copy; 2024 Zafike Royal Hotel. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+   const mobileMenu = document.querySelector('.mobile-menu');
+    const navMenu = document.querySelector('.nav-menu');
+    const navLinks = document.querySelectorAll('.nav-menu a');
+
+    // Toggle menu on hamburger click
+    mobileMenu.addEventListener('click', function () {
+        navMenu.classList.toggle('active');
+        mobileMenu.classList.toggle('open');
+        document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : 'auto';
+    });
+
+    // Close menu when a link is clicked
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+            mobileMenu.classList.remove('open');
+            document.body.style.overflow = 'auto';
+        });
+    });
+</script>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Room filtering
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const roomCards = document.querySelectorAll('.room-card');
+
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterButtons.forEach(b => b.classList.remove('active'));
+                // Add active class to clicked button
+                btn.classList.add('active');
+                
+                const filter = btn.dataset.filter;
+                
+                roomCards.forEach(card => {
+                    if (filter === 'all' || card.dataset.category === filter) {
+                        card.style.display = 'block';
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'translateY(0)';
+                        }, 10);
+                    } else {
+                        card.style.opacity = '0';
+                        card.style.transform = 'translateY(30px)';
+                        setTimeout(() => {
+                            card.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            });
+        });
+
+        // Room details data
+        const roomDetails = {
+            'Royal Executive': {
+                title: 'Royal Executive Room',
+                price: 'N31,000',
+                image: 'image/royalexe.png',
+                description: `Our Royal Executive Rooms combine comfort and elegance in a thoughtfully designed space. Each room features modern amenities, comfortable furnishings, and city views. Perfect for business travelers or couples seeking a comfortable stay without compromising on quality.
+
+                The room includes a comfortable queen-size bed with premium linens, a work desk with ergonomic chair, and a modern bathroom with rainfall shower. Large windows provide natural light and offer pleasant city views.`,
+                amenities: [
+                    { icon: 'fas fa-wifi', text: 'Complimentary High-Speed Wi-Fi' },
+                    { icon: 'fas fa-snowflake', text: 'Individual Air Conditioning' },
+                    { icon: 'fas fa-tv', text: 'Smart TV with Streaming' },
+                    { icon: 'fas fa-bath', text: 'Luxury Bathroom with Rainfall Shower' },
+                    { icon: 'fas fa-bed', text: 'King Size Bed with Premium Linens' },
+                    { icon: 'fas fa-coffee', text: 'Coffee/Tea Making Facilities' },
+                    { icon: 'fas fa-lock', text: 'Electronic Safe' },
+                    { icon: 'fas fa-phone', text: 'Direct Dial Telephone' },
+                    { icon: 'fas fa-tshirt', text: 'Daily Housekeeping Service' },
+                    { icon: 'fas fa-utensils', text: 'Complimentary Breakfast' }
+                ]
+            },
+            'Royal deluxe': {
+                title: 'Royal Deluxe Room',
+                price: 'N27,000',
+                image: 'image/royaldeluxe.png',
+                description: `Experience elevated comfort in our Deluxe Rooms, featuring spacious layouts and premium amenities. These rooms are designed for guests who appreciate fine details and superior comfort.
+
+                Each Deluxe Room offers a separate seating area, king-size bed, luxury bathroom with bathtub, and enhanced amenities. The rooms feature elegant décor with attention to every detail, ensuring a memorable stay.`,
+                amenities: [
+                    { icon: 'fas fa-wifi', text: 'Premium High-Speed Wi-Fi' },
+                    { icon: 'fas fa-wind', text: 'Climate Control System' },
+                    { icon: 'fas fa-tv', text: 'Smart TV with Premium Channels' },
+                    { icon: 'fas fa-spa', text: 'Luxury Bathroom with Bathtub & Shower' },
+                    { icon: 'fas fa-bed', text: 'King Size Bed with Luxury Linens' },
+                    { icon: 'fas fa-couch', text: 'Separate Seating Area' },
+                    { icon: 'fas fa-coffee', text: 'Premium Coffee & Tea Station' },
+                    { icon: 'fas fa-concierge-bell', text: 'Enhanced Room Service Menu' }
+                ]
+            },
+             'Exclusive deluxe': {
+                title: 'Exclusive Deluxe Room',
+                price: 'N30,000',
+                image: 'image/deluxe.JPG',
+                description: `Experience elevated comfort in our Deluxe Rooms, featuring spacious layouts and premium amenities. These rooms are designed for guests who appreciate fine details and superior comfort.
+
+                Each Deluxe Room offers a separate seating area, king-size bed, luxury bathroom with bathtub, and enhanced amenities. The rooms feature elegant décor with attention to every detail, ensuring a memorable stay.`,
+                amenities: [
+                    { icon: 'fas fa-wifi', text: 'Premium High-Speed Wi-Fi' },
+                    { icon: 'fas fa-wind', text: 'Climate Control System' },
+                    { icon: 'fas fa-tv', text: 'Smart TV with Premium Channels' },
+                    { icon: 'fas fa-spa', text: 'Luxury Bathroom with Bathtub & Shower' },
+                    { icon: 'fas fa-bed', text: 'King Size Bed with Luxury Linens' },
+                    { icon: 'fas fa-couch', text: 'Separate Seating Area' },
+                    { icon: 'fas fa-coffee', text: 'Premium Coffee & Tea Station' },
+                    { icon: 'fas fa-concierge-bell', text: 'Enhanced Room Service Menu' }
+                ]
+            },
+            'Queens Lodge': {
+                title: 'Queens Lodge',
+                price: 'N34,000',
+                image: 'image/queennn.png',
+                description: `Our Queens Lodge offer the perfect blend of luxury and space, featuring separate living and sleeping areas. Ideal for extended stays or special occasions.
+
+                These suites feature a comfortable living room with sofa and work area, separate bedroom with king-size bed, luxury bathroom with premium amenities, and a well-stocked minibar.`,
+                amenities: [
+                    { icon: 'fas fa-wifi', text: 'Premium Wi-Fi Throughout Suite' },
+                    { icon: 'fas fa-wind', text: 'Individual Climate Zones' },
+                    { icon: 'fas fa-spa', text: 'Marble Bathroom with Premium Amenities' },
+                    { icon: 'fas fa-bed', text: 'King Bed with Italian Linens' },
+                    { icon: 'fas fa-couch', text: 'Separate Sitting Area' },
+                    { icon: 'fas fa-utensils', text: 'Complimentary Breakfast' },
+                    { icon: 'fas fa-concierge-bell', text: 'Priority Room Service' }
+                ]
+            },
+            'Kings Lodge': {
+                title: 'Kings Lodge',
+                price: 'N36,000',
+                image: 'image/kingg.png',
+                description: `Experience unparalleled luxury in our Kings Lodge, designed for discerning guests who expect the finest accommodations.
+
+                These expansive suites feature a master bedroom, spacious living room, dining area, luxury bathroom with spa amenities, and access to exclusive executive services including dedicated concierge.`,
+                amenities: [
+
+                    { icon: 'fas fa-utensils', text: 'Private Dining Area' },
+                    { icon: 'fas fa-bed', text: 'California King Bed' },
+                   { icon: 'fas fa-wifi', text: 'Premium Wi-Fi Throughout Suite' },
+                    { icon: 'fas fa-wind', text: 'Individual Climate Zones' },
+                    { icon: 'fas fa-spa', text: 'Marble Bathroom with Premium Amenities' },
+                    { icon: 'fas fa-bed', text: 'King Bed with Italian Linens' },
+                    { icon: 'fas fa-couch', text: 'Separate Sitting Area' },
+                    { icon: 'fas fa-utensils', text: 'Complimentary Breakfast' },
+                    { icon: 'fas fa-concierge-bell', text: 'Priority Room Service' }
+                
+                ]
+            },
+            'royal-suite': {
+                title: 'Royal Suite',
+                price: 'N45,000',
+                image: 'image/royalsuite1.png',
+                description: `The pinnacle of luxury accommodation, our Royal Suite offers an unmatched experience fit for royalty. This magnificent suite spans over 1,200 square feet of elegantly appointed space.
+
+                Features include a master bedroom with California king bed, separate living and dining areas, premium kitchen facilities, spa-style bathroom with steam shower, and a private balcony with stunning views.`,
+                amenities: [
+                    { icon: 'fas fa-crown', text: 'VIP Check-in/Check-out' },
+                    { icon: 'fas fa-utensils', text: ' Dining Area' },
+                    { icon: 'fas fa-spa', text: 'Master Bathroom with Steam Shower' },
+                    { icon: 'fas fa-bed', text: 'California King with Luxury Bedding' },
+                    { icon: 'fas fa-user-tie', text: 'Dedicated Butler Service' },
+                   { icon: 'fas fa-wifi', text: 'Premium Wi-Fi Throughout Suite' },
+                    { icon: 'fas fa-wind', text: 'Individual Climate Zones' },
+                    { icon: 'fas fa-tv', text: 'Multiple Smart TVs' },
+                    { icon: 'fas fa-spa', text: 'Marble Bathroom with Premium Amenities' },
+                    { icon: 'fas fa-bed', text: 'King Bed with Italian Linens' },
+                    { icon: 'fas fa-couch', text: 'Separate Sitting Area' },
+                    { icon: 'fas fa-utensils', text: 'Complimentary Breakfast' },
+                    { icon: 'fas fa-concierge-bell', text: 'Priority Room Service' }
+                
+                ]
+            },
+            'Senator-suite': {
+                title: 'Senator Suite',
+                price: 'N45,000',
+                image: 'image/senator1.png',
+                description: `The ultimate luxury experience, our Senator Suite represents the finest in hospitality. This exceptional 2,000+ square foot suite offers unparalleled elegance and service.
+
+                The suite features two master bedrooms, expansive living areas, private dining room, full kitchen, multiple bathrooms, home theater system, and a stunning private terrace with panoramic city views.`,
+                amenities: [
+                     { icon: 'fas fa-crown', text: 'VIP Check-in/Check-out' },
+                    { icon: 'fas fa-utensils', text: ' Dining Area' },
+                    { icon: 'fas fa-spa', text: 'Master Bathroom with Steam Shower' },
+                    { icon: 'fas fa-bed', text: 'California King with Luxury Bedding' },
+                    { icon: 'fas fa-user-tie', text: 'Dedicated Butler Service' },
+                   { icon: 'fas fa-wifi', text: 'Premium Wi-Fi Throughout Suite' },
+                    { icon: 'fas fa-wind', text: 'Individual Climate Zones' },
+                    { icon: 'fas fa-tv', text: 'Multiple Smart TVs' },
+                    { icon: 'fas fa-spa', text: 'Marble Bathroom with Premium Amenities' },
+                    { icon: 'fas fa-bed', text: 'King Bed with Italian Linens' },
+                    { icon: 'fas fa-couch', text: 'Separate Sitting Area' },
+                    { icon: 'fas fa-utensils', text: 'Complimentary Breakfast' },
+                    { icon: 'fas fa-concierge-bell', text: 'Priority Room Service' }
+                ]
+            }
+        };
+
+        // View room details function
+        function viewDetails(roomType) {
+            const modal = document.getElementById('roomModal');
+            const details = roomDetails[roomType];
+
+            if (details) {
+                document.getElementById('modalTitle').textContent = details.title;
+                document.getElementById('modalPrice').textContent = details.price;
+                document.getElementById('modalDescription').innerHTML = details.description.split('\n').map(p => `<p>${p.trim()}</p>`).join('');
+                document.getElementById('modalBookBtn').onclick = () => bookRoom(details.title, parseInt(details.price.replace('N', '').replace(',', '')));
+                document.getElementById('modalHeader').style.backgroundImage = `url('${details.image}')`;
+
+                const amenitiesContainer = document.getElementById('modalAmenities');
+                amenitiesContainer.innerHTML = details.amenities.map(amenity =>
+                    `<div class="amenity-item">
+                        <i class="${amenity.icon}"></i>
+                        <span>${amenity.text}</span>
+                    </div>`
+                ).join('');
+
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        // Close modal function
+        function closeModal() {
+            const modal = document.getElementById('roomModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Book room function - opens booking modal
+        function bookRoom(roomName, price) {
+            // Close room details modal if open
+            const roomModal = document.getElementById('roomModal');
+            if (roomModal.classList.contains('active')) {
+                roomModal.classList.remove('active');
+            }
+
+            const modal = document.getElementById('bookingModal');
+            const roomInput = document.getElementById('room');
+            const priceInput = document.getElementById('price');
+
+            // Set the room type and price in the form
+            roomInput.value = roomName;
+            priceInput.value = price;
+
+            // Show the booking modal
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close booking modal
+        function closeBookingModal() {
+            const modal = document.getElementById('bookingModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Submit booking form with EmailJS
+        function submitBooking(event) {
+            event.preventDefault();
+            
+            // Get form data
+            const checkinDate = new Date(document.getElementById('checkin').value);
+            const checkoutDate = new Date(document.getElementById('checkout').value);
+            const today = new Date();
+            today.setHours(0, 0, 0, 0); // Set to start of today
+            
+            // Validate dates
+            if (checkinDate < today) {
+                document.getElementById('confirmation').innerHTML = `
+                    <div style="background: #f8d7da; color: #721c24; padding: 1rem; border-radius: 5px; margin-top: 1rem;">
+                        <h3 style="color: #721c24; margin-bottom: 0.5rem;">Invalid Check-in Date</h3>
+                        <p>Please select a check-in date that is today or in the future.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            if (checkoutDate <= checkinDate) {
+                document.getElementById('confirmation').innerHTML = `
+                    <div style="background: #f8d7da; color: #721c24; padding: 1rem; border-radius: 5px; margin-top: 1rem;">
+                        <h3 style="color: #721c24; margin-bottom: 0.5rem;">Invalid Check-out Date</h3>
+                        <p>Check-out date must be after check-in date.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            const formData = {
+                checkin: document.getElementById('checkin').value,
+                checkout: document.getElementById('checkout').value,
+                room: document.getElementById('room').value,
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                requests: document.getElementById('requests').value
+            };
+
+            // Send email using EmailJS
+            emailjs.send("service_cw1dzj7", "template_hr882sv", {
+                checkin_date: formData.checkin,
+                checkout_date: formData.checkout,
+                room_type: formData.room,
+                guest_name: formData.name,
+                guest_email: formData.email,
+                special_requests: formData.requests,
+                booking_date: new Date().toLocaleDateString(),
+                booking_time: new Date().toLocaleTimeString()
+            })
+            .then(function(response) {
+                console.log('SUCCESS!', response.status, response.text);
+                // Show success message
+                document.getElementById('confirmation').innerHTML = `
+                    <div style="background: #d4edda; color: #155724; padding: 1rem; border-radius: 5px; margin-top: 1rem;">
+                        <h3 style="color: #155724; margin-bottom: 0.5rem;">Booking Request Sent Successfully!</h3>
+                        <p>Thank you, ${formData.name}! Your booking request for the ${formData.room} has been received.</p>
+                        <p>We will contact you at ${formData.email} within 24 hours to confirm your reservation.</p>
+                    </div>
+                `;
+                
+                // Clear form
+                document.getElementById('bookingForm').reset();
+                
+                // Auto-close modal after 5 seconds
+                setTimeout(() => {
+                    closeBookingModal();
+                    document.getElementById('confirmation').innerHTML = '';
+                }, 5000);
+            })
+            .catch(function(error) {
+                console.log('FAILED...', error);
+                // Show error message
+                document.getElementById('confirmation').innerHTML = `
+                    <div style="background: #f8d7da; color: #721c24; padding: 1rem; border-radius: 5px; margin-top: 1rem;">
+                        <h3 style="color: #721c24; margin-bottom: 0.5rem;">Booking Failed</h3>
+                        <p>Sorry, there was an error processing your booking. Please try again or contact us directly.</p>
+                    </div>
+                `;
+            });
+        }
+
+        // Close booking modal when clicking outside
+        window.addEventListener('click', function(e) {
+            const bookingModal = document.getElementById('bookingModal');
+            const roomModal = document.getElementById('roomModal');
+            
+            if (e.target === bookingModal) {
+                closeBookingModal();
+            }
+            if (e.target === roomModal) {
+                closeModal();
+            }
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(e) {
+            const modal = document.getElementById('roomModal');
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Mobile menu toggle (basic implementation)
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            const navMenu = document.querySelector('.nav-menu');
+            navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        // Add smooth scrolling to all links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Add animation on scroll for room cards
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all room cards for animation
+        document.querySelectorAll('.room-card').forEach(card => {
+            observer.observe(card);
+        });
+
+        // Set minimum date for check-in to today's date
+        function setMinDate() {
+            const today = new Date();
+            const year = today.getFullYear();
+            const month = String(today.getMonth() + 1).padStart(2, '0');
+            const day = String(today.getDate()).padStart(2, '0');
+            const todayFormatted = `${year}-${month}-${day}`;
+            
+            const checkinInput = document.getElementById('checkin');
+            if (checkinInput) {
+                checkinInput.min = todayFormatted;
+            }
+        }
+
+        // Set minimum date when page loads
+        document.addEventListener('DOMContentLoaded', setMinDate);
+
+        // Image cycling for Senator Suite
+        const senatorSuiteImages = [
+            'image/senator1.png',
+            'image/senator2.png',
+            'image/senator4.png'
+        ];
+
+        let currentSenatorImageIndex = 0;
+        const senatorSuiteElement = document.querySelector('.room-image.senator-suite');
+
+        function cycleSenatorSuiteImages() {
+            if (senatorSuiteElement) {
+                senatorSuiteElement.style.backgroundImage = `url('${senatorSuiteImages[currentSenatorImageIndex]}')`;
+                currentSenatorImageIndex = (currentSenatorImageIndex + 1) % senatorSuiteImages.length;
+            }
+        }
+
+        // Image cycling for Royal Suite
+        const royalSuiteImages = [
+            'image/royalsuite3.png',
+            'image/royalsuite4.png',
+            'image/royalsuite1.png'
+        ];
+
+        let currentRoyalImageIndex = 0;
+        const royalSuiteElement = document.querySelector('.room-image.royal-suite');
+
+        function cycleRoyalSuiteImages() {
+            if (royalSuiteElement) {
+                royalSuiteElement.style.backgroundImage = `url('${royalSuiteImages[currentRoyalImageIndex]}')`;
+                currentRoyalImageIndex = (currentRoyalImageIndex + 1) % royalSuiteImages.length;
+            }
+        }
+
+        // Start cycling images every 3 seconds
+        setInterval(cycleSenatorSuiteImages, 3000);
+        setInterval(cycleRoyalSuiteImages, 3000);
+
+        // Set initial images
+        cycleSenatorSuiteImages();
+        cycleRoyalSuiteImages();
+
+        // Newsletter subscription functionality
+        document.getElementById('newsletterBtn').addEventListener('click', function() {
+            const email = document.getElementById('newsletterEmail').value;
+            const messageDiv = document.getElementById('newsletterMessage');
+
+            // Validate email
+            if (!email || !email.includes('@')) {
+                messageDiv.innerHTML = '<p style="color: #dc3545; font-size: 0.9rem;">Please enter a valid email address.</p>';
+                return;
+            }
+
+            // Send newsletter subscription email
+            emailjs.send("service_cw1dzj7", "template_8q9k8xj", {
+                subscriber_email: email,
+                subscription_date: new Date().toLocaleDateString(),
+                subscription_time: new Date().toLocaleTimeString()
+            })
+            .then(function(response) {
+                console.log('Newsletter subscription SUCCESS!', response.status, response.text);
+                messageDiv.innerHTML = '<p style="color: #28a745; font-size: 0.9rem;">Thank you for subscribing! You will receive our latest updates and offers.</p>';
+                document.getElementById('newsletterEmail').value = ''; // Clear the input
+
+                // Clear message after 5 seconds
+                setTimeout(() => {
+                    messageDiv.innerHTML = '';
+                }, 5000);
+            })
+            .catch(function(error) {
+                console.log('Newsletter subscription FAILED...', error);
+                messageDiv.innerHTML = '<p style="color: #dc3545; font-size: 0.9rem;">Sorry, there was an error. Please try again later.</p>';
+
+                // Clear error message after 5 seconds
+                setTimeout(() => {
+                    messageDiv.innerHTML = '';
+                }, 5000);
+            });
+        });
+
+        // Allow Enter key to submit newsletter
+        document.getElementById('newsletterEmail').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                document.getElementById('newsletterBtn').click();
+            }
+        });
+
+        // Preloader functionality
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                const preloader = document.getElementById('preloader');
+                preloader.classList.add('hidden');
+            }, 1500);
+        });
+    </script>
+</body>
+</html>
